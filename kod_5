@@ -1,0 +1,59 @@
+/*
+
+Główna czesc programu bedzie stanowiła petla wykonujaca sie
+tak długo jak długo bedzie toczyła sie gra.
+Kolejne obroty petli beda odpowiadały kolejnym ruchom
+graczy.
+Gracze ruszaja sie na zmiane.
+Dopóki gra jest nierozstrzygnieta zmienna wynik bedzie miała
+wartosc 0.
+Stan gry bedzie oceniac funkcja sprawdz.
+Zmienna wynik bedzie miała wartosc:
+0 – gdy gra jest niezakonczona,
+1 – gdy gra zakonczyła sie remisem,
+’x’ – gdy wygrały krzyzyki,
+’o’ – gdy wygrały kółka
+Dla uproszczenia przyjmujemy, ze człowiek zawsze gra
+krzyzykami a komputer kółkami.
+Funkcja wypisz bedzie wypisywac stan planszy
+ */
+int main(int argc, char *argv[])
+{
+int ruch = 1;
+char wynik = 0;
+char plansza [3][3];
+printf("********************************************************************************\n");
+printf("-============================== KOLKO I KRZYZYK ================================\n");
+srand(time(NULL));
+wyczysc(plansza);
+    while (wynik==0)
+    {
+        if (ruch==0)
+            ruch_gracza(plansza);
+        else
+            ruch_komputera(plansza);
+        ruch=1-ruch;
+        wynik=sprawdz(plansza);
+    }
+    wypisz(plansza);
+    if (wynik==1)
+        printf("Remis\n");
+    else
+        if (wynik=='x')
+        {
+            printf("Wygrales!!! :-) \n");
+            printf("Nacisnij ENTER aby kontynowac\n");
+            getchar();
+            getchar();
+        }
+    else
+    {
+        printf("Przegrales :( \n");
+        printf("Nacisnij ENTER aby kontynowac\n");
+        getchar();
+        getchar();
+    }
+ // for
+
+return 0;
+}
