@@ -1,0 +1,61 @@
+/* Najprostsza wersja tej funkcji to taka, która losuje pole na
+którym komputer postawi kółko.
+Do losowania uzyjemy funkcji rand.
+Jezeli wylosujemy zajete pole, to ponowimy losowanie.
+Aby komputer nie losował za kazdym razem tych samych
+wartosci nalezy na poczatku funkcji main zainicjowac
+generator liczb pseudolosowych poleceniem:
+srand(time(NULL));
+Do programu nalezy dołaczyc pliki nagłówkowe:
+#include <stdlib.h>
+#include <time.h>*/
+
+/*Chcemy, zeby w sytuacji, gdy w jednej linii stoja dwa kółka,
+komputer, o ile tylko sie da, dostawiał trzecie kółko.
+Podobnie chcemy, zeby komputer blokował kółkami pary
+krzyzyków znajdujacych sie w jednej linii.
+Pierwszenstwo ma oczywiscie uzupełnianie par kółek.
+Do uzupełniania par bedzie słuzyła funkcja uzupełnij,
+która bedzie zwracała wartosc rózna od zera wtedy i tylko
+wtedy, gdy uda sie jej uzupełnic jakas pare.
+Funkcja uzupełnij bedzie miała dwa argumenty:
+plansze,
+znak, którego pary maja byc uzupełniane kółkami.*/
+void ruch_komputera(char plansza[3][3])
+{
+unsigned int i, j, k;
+if (uzupelnij(plansza,'o'))
+return;
+if (uzupelnij(plansza,'x'))
+return;
+
+/*
+Okazuje sie, ze niezła strategia jest gdy komputer w pierwszej
+kolejnosci próbuje ruszac sie w naroznikach.*/
+
+    for (k=0;k<4;i++)
+    {
+        i = rand()%2;
+        j=rand()%2;
+        if (plansza[2*i][2*j]==' ')
+        {
+            plansza[2*i][2*j]='o';
+            return;
+        }
+    }
+
+    do
+    {
+        i=rand()%3;
+        j=rand()%3;
+    }
+        while(plansza[i][j]!=' ');
+            plansza[i][j]='o';
+ do{
+    i=rand()%3;
+    j=rand()%3;
+    } while (plansza[i][j]!=' ');
+
+plansza[i][j]='o';
+
+}
